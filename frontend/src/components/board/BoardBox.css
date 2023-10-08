@@ -1,0 +1,11 @@
+.board-box {
+  width: 750px;
+  height: 750px;
+  margin: auto;
+  margin-top: 20%;
+  margin-top: 50px;
+  position: relative;
+  box-sizing: border-box;
+  background-color: #96420f;
+  border: solid 1px #96420f;
+}

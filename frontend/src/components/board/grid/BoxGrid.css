@@ -1,0 +1,25 @@
+.grid-box {
+  width: 725px;
+  height: 725px;
+  position: abosulte;
+  box-sizing: border-box;
+  border: solid 4px #000000;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.vertical-line {
+  position: absolute;
+  height: 720px;
+  width: 0px;
+  box-sizing: border-box;
+  border: solid 2px #000000;
+}
+
+.horizontal-line {
+  position: absolute;
+  width: 720px;
+  height: 0px;
+  box-sizing: border-box;
+  border: solid 2px #000000;
+}
