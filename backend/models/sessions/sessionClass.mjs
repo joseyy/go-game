@@ -26,4 +26,7 @@ export default class Session {
     this.gameSessionIndex = gameSessionIndex;
   }
 
+  isWsClosed() {
+    return this.ws.readyState === Websocket.CLOSED;
+  }
 }
