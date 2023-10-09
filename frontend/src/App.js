@@ -10,12 +10,9 @@ function App() {
   const [opponentActive, setOpponentActive] = useState(false);
   const [ws, setWs] = useState(null);
 
-  
-
   return (
     <div className="App">
-      <OpponentActive opponentActive={opponentActive} />
-      <MainButton setWs={setWs} newWs={ws} />
+      <MainButton setWs={setWs} />
       <PlayerColor setColor={setColor} color={color} />
       <BoardBox color={color} />
     </div>

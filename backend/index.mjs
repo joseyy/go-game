@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
-import InitiateNewClientConnection from "./controller/sessions/sessionConnection.mjs";
-
+import WebSocketServerWithQueue from "./models/sessions/sessionConnection.mjs";
+import { WebSocketServer } from "ws";
 dotenv.config();
 
 const app = express();
 
-InitiateNewClientConnection();
+const webSocketServerWithQueue = new WebSocketServerWithQueue();
 
 app.get("/", (req, res) => {
   res.send("Hello World");
