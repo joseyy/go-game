@@ -25,7 +25,7 @@ export default class WebSocketServerWithQueue {
     ws.on("close", () => {
       // Find the game this session belongs to
       const gameSession = session.gameSession;
-      console.log("gameSession", gameSession);
+
       if (gameSession) {
         gameSession.players.forEach((player) => {
           if (player !== session) {
