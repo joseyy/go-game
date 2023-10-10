@@ -1,0 +1,8 @@
+.waiting-for-opponent-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 10%;
+}

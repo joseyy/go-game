@@ -31,6 +31,7 @@ export default class WebSocketServerWithQueue {
         gameSession.players.forEach((player) => {
           if (player !== session && !player.isWsClosed()) {
             this.sessions.push(player);
+            player.opponentLeftGame();
             console.log("player added to queue");
 
             player.opponentLeftGame();
@@ -77,6 +78,6 @@ export default class WebSocketServerWithQueue {
     );
     session_1.setGameSessionIndex(this.gameSessions.length - 1);
     session_2.setGameSessionIndex(this.gameSessions.length - 1);
-    
+    return true;
   }
 }

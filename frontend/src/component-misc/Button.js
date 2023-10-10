@@ -1,31 +1,16 @@
 import { useState, useEffect } from "react";
-import Websocket from "ws";
+import { initiatePlayerSession } from "../components/sessions/playerSession";
 import "./Button.css";
 
 export default function MainButton(props) {
-  const [ws, setWs] = useState(null);
+  const { setShowMainButton, setWsSession } = props;
+  const [wsActive, setWsActive] = useState(false);
 
   function handleClick() {
-    if (!ws) {
-      const newWs = new WebSocket("ws://localhost:3002");
-
-      newWs.onopen = () => {
-        console.log("connected");
-      };
-
-      newWs.onmessage = (event) => {
-        console.log("received message:", event.data);
-      };
-
-      newWs.onclose = () => {
-        console.log("disconnected");
-      };
-
-      setWs(newWs);
-
-      return () => {
-        newWs.close();
-      };
+    if (!wsActive) {
+      setShowMainButton("waiting");
+      initiatePlayerSession(props);
+      setWsActive(true);
     }
   }
 

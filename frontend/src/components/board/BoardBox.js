@@ -4,9 +4,8 @@ import GridBox from "./grid/BoxGrid";
 import { useState } from "react";
 
 export default function BoardBox(props) {
-  const [currentGamepState, setCurrentGameState] = useState([]);
+  const { playState, setPlayState, opponentPlay, color, wsSession } = props;
 
-  const playerColor = props.color;
   // Generate an array of PositionPlace with a position based on top=left for left 0-100px and top 0-100px
   const positionArray = [];
   for (let r = 0; r < 20; r++) {
@@ -20,10 +19,12 @@ export default function BoardBox(props) {
         <PositionPlace
           position={position}
           key={`x:${c}, y:${r}`}
-          color={playerColor}
-          addPlay={setCurrentGameState}
+          color={color}
+          setPlayState={setPlayState}
           playCoor={{ x: r, y: c }}
-          currentGamepState={currentGamepState}
+          currentMoveState={playState}
+          wsSession={wsSession}
+          opponentPlay={opponentPlay}
         />
       );
     }
