@@ -24,12 +24,11 @@ export default class WebSocketServerWithQueue {
 
     ws.on("close", () => {
       // Find the game this session belongs to
-      const gameIndex = session.gameSessionIndex;
-      const gameSession = this.gameSessions[gameIndex];
-
+      const gameSession = session.gameSession;
+      console.log("gameSession", gameSession);
       if (gameSession) {
         gameSession.players.forEach((player) => {
-          if (player !== session && !player.isWsClosed()) {
+          if (player !== session) {
             this.sessions.push(player);
             player.opponentLeftGame();
             console.log("player added to queue");
@@ -42,7 +41,7 @@ export default class WebSocketServerWithQueue {
             }
           }
         });
-        this.gameSessions.splice(gameIndex, 1);
+        this.gameSessions.splice(this.gameSessions.indexOf(gameSession), 1);
       }
 
       // remove session from sessions array
@@ -63,7 +62,6 @@ export default class WebSocketServerWithQueue {
   }
 
   startNewGameSession() {
-    this.sendSessionsStats();
     // Make sure there is at least 2 sessions
     if (this.sessions.length < 2) {
       return false;
@@ -72,12 +70,10 @@ export default class WebSocketServerWithQueue {
     const session_2 = this.sessions.shift();
     const gameSession = new GameSession(session_1, session_2);
     this.gameSessions.push(gameSession);
-    console.log(
-      "Game session started: Number of game sessions: ",
-      this.gameSessions.length
-    );
-    session_1.setGameSessionIndex(this.gameSessions.length - 1);
-    session_2.setGameSessionIndex(this.gameSessions.length - 1);
+
+    session_1.gameSession = gameSession;
+    session_2.gameSession = gameSession;
+    this.sendSessionsStats();
     return true;
   }
 }

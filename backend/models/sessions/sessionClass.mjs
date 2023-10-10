@@ -4,7 +4,7 @@ export default class Session {
   constructor(ws) {
     this.ws = ws;
     this.ws.on("message", this.onMessage.bind(this));
-    this.gameSessionIndex = null;
+    this._gameSession = null;
     this.playerColor = "";
   }
 
@@ -27,8 +27,12 @@ export default class Session {
     this.ws.send('{"notification":"Opponent left"}');
   }
 
-  setGameSessionIndex(gameSessionIndex) {
-    this.gameSessionIndex = gameSessionIndex;
+  set gameSession(value) {
+    this._gameSession = value;
+  }
+
+  get gameSession() {
+    return this._gameSession;
   }
 
   isWsClosed() {
