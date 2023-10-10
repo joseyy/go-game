@@ -1,12 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import WebSocketServerWithQueue from "./models/sessions/sessionConnection.mjs";
-import { WebSocketServer } from "ws";
+import GameSessionManager from "./models/sessions/sessionConnection.mjs";
+import DB from "./controller/db/db.mjs";
+
 dotenv.config();
 
 const app = express();
 
-const webSocketServerWithQueue = new WebSocketServerWithQueue();
+const db = new DB();
+
+const gameSessionManager = new GameSessionManager(db);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

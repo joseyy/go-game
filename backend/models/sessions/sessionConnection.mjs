@@ -5,12 +5,13 @@ import GameSession from "./gameSession.mjs";
 
 dotenv.config();
 
-export default class WebSocketServerWithQueue {
-  constructor() {
+export default class GameSessionManager {
+  constructor(db) {
     this.wss = new WebSocketServer({ port: 3002 });
     this.sessions = [];
     this.gameSessions = [];
     this.wss.on("connection", this.handleConnection.bind(this));
+    this.db = db;
   }
 
   handleConnection(ws) {
@@ -68,7 +69,7 @@ export default class WebSocketServerWithQueue {
     }
     const session_1 = this.sessions.shift();
     const session_2 = this.sessions.shift();
-    const gameSession = new GameSession(session_1, session_2);
+    const gameSession = new GameSession(session_1, session_2, this.db);
     this.gameSessions.push(gameSession);
 
     session_1.gameSession = gameSession;

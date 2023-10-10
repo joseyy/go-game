@@ -1,5 +1,6 @@
 export default class GameSessionState {
   constructor(gameSessionId) {
+    this.gameSessionId = gameSessionId;
     this.boardState = [];
   }
   setBoardState(boardState) {

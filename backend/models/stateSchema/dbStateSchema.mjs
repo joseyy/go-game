@@ -8,7 +8,7 @@ const moveSchema = new mongoose.Schema({
   color: { type: String, required: true },
 });
 
-const stateSchema = new mongoose.Schema({
+export const stateSchema = new mongoose.Schema({
   gameID: { type: String, required: true },
-  boardState: [moveSchema],
+  moves: [moveSchema],
 });
