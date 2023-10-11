@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import GameSessionManager from "./models/sessions/sessionConnection.mjs";
 import DB from "./controller/db/db.mjs";
+import PossibleMoves from "./controller/game/possibleMoves.mjs";
 
 dotenv.config();
 

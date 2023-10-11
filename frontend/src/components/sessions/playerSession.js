@@ -20,8 +20,13 @@ export function initiatePlayerSession(props) {
 }
 
 export async function handleMessagesFromServer(props, event) {
-  const { setPlayerFound, setShowMainButton, setColor, setOpponentPlay } =
-    props;
+  const {
+    setPlayerFound,
+    setShowMainButton,
+    setColor,
+    setOpponentPlay,
+    setBoardState,
+  } = props;
   console.log("event:", event);
 
   if (event.notification) {
@@ -40,5 +45,7 @@ export async function handleMessagesFromServer(props, event) {
     }
   } else if (event.move) {
     setOpponentPlay(event.move);
+  } else if (event.boardState) {
+    setBoardState(event.boardState);
   }
 }

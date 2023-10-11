@@ -4,7 +4,15 @@ import GridBox from "./grid/BoxGrid";
 import { useState } from "react";
 
 export default function BoardBox(props) {
-  const { playState, setPlayState, opponentPlay, color, wsSession } = props;
+  const {
+    boardState,
+    playState,
+    setPlayState,
+    opponentPlay,
+    color,
+    wsSession,
+    setBoardState,
+  } = props;
 
   // Generate an array of PositionPlace with a position based on top=left for left 0-100px and top 0-100px
   const positionArray = [];
@@ -25,6 +33,8 @@ export default function BoardBox(props) {
           currentMoveState={playState}
           wsSession={wsSession}
           opponentPlay={opponentPlay}
+          boardState={boardState}
+          setBoardState={setBoardState}
         />
       );
     }

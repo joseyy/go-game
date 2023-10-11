@@ -10,6 +10,8 @@ export default function PositionPlace(props) {
     playState,
     opponentPlay,
     wsSession,
+    boardState,
+    setBoardState,
   } = props;
 
   const [style, setStyle] = useState({
@@ -39,16 +41,27 @@ export default function PositionPlace(props) {
   }, [opponentPlay, style, color, playCoor]);
 
   function handlePlay() {
+    // Check if the position is already taken or invalid
+    if (boardState) {
+      const coors = boardState.map(({ move: { coor } }) => coor);
+      for (const coor of coors) {
+        if (coor.x === playCoor.x && coor.y === playCoor.y) return;
+      }
+    }
+
     const newStyle = {
       ...style,
       backgroundColor: color,
     };
+
+    const newBoardState = boardState;
+    newBoardState.push({ move: { coor: playCoor, color: color } });
+    setBoardState(newBoardState);
+
     setStyle(newStyle);
-    console.log("color", color);
-    console.log("style", style);
     setPlayState({ move: { coor: playCoor, color: color } });
     wsSession.send(JSON.stringify({ move: { coor: playCoor, color: color } }));
-    console.log(playState);
+    console.log(boardState);
   }
 
   return <div className="position-place" style={style} onClick={handlePlay} />;

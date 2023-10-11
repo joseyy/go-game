@@ -15,6 +15,7 @@ function App() {
   });
   const [playState, setPlayState] = useState();
   const [wsSession, setWsSession] = useState(null);
+  const [boardState, setBoardState] = useState([]);
 
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
           setOpponentPlay={setOpponentPlay}
           playState={playState}
           setWsSession={setWsSession}
+          setBoardState={setBoardState}
         />
       )}
       {showMainButton === "waiting" && !playerFound && <WaitingForPlayer />}
@@ -36,6 +38,8 @@ function App() {
         playState={playState}
         setPlayState={setPlayState}
         wsSession={wsSession}
+        boardState={boardState}
+        setBoardState={setBoardState}
       />
     </div>
   );

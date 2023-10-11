@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { initiatePlayerSession } from "../components/sessions/playerSession";
 import "./Button.css";
 
 export default function MainButton(props) {
-  const { setShowMainButton, setWsSession } = props;
+  const { setShowMainButton} = props;
   const [wsActive, setWsActive] = useState(false);
 
   function handleClick() {

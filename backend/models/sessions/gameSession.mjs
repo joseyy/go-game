@@ -1,5 +1,6 @@
 import GameSessionState from "./gameSessionState.mjs";
 import { v4 as uuidv4 } from "uuid";
+import PossibleMoves from "../../controller/game/possibleMoves.mjs";
 
 export default class GameSession {
   constructor(session_1, session_2, db) {
@@ -11,6 +12,8 @@ export default class GameSession {
 
     // Create a new game session state
     this.gameSessionState = new GameSessionState(this.gameID);
+
+    this.possibleMoves = new PossibleMoves(20);
 
     // db
     this.db = db;
@@ -38,7 +41,12 @@ export default class GameSession {
   onMessage(playerIndex, message) {
     const messageParsed = JSON.parse(message);
     if (messageParsed.move) {
+      // update game state
       this.gameSessionState.setBoardState(messageParsed);
+      // send state to other player
+      const boardState = this.gameSessionState.getBoardState();
+      this.players[1 - playerIndex].ws.send(JSON.stringify({ boardState }));
+      // send move to other player for rendering
       this.players[1 - playerIndex].ws.send(JSON.stringify(messageParsed));
       // save move to db
       this.db.saveMove(this.gameID, messageParsed.move);
