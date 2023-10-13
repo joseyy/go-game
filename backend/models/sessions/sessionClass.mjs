@@ -5,15 +5,19 @@ export default class Session {
     this.ws = ws;
     this.ws.on("message", this.onMessage.bind(this));
     this._gameSession = null;
-    this.playerColor = "";
+    this._playerColor = "";
   }
 
-  setColor(color) {
-    this.playerColor = color;
+  set playerColor(color) {
+    this._playerColor = color;
+  }
+
+  get playerColor() {
+    return this._playerColor;
   }
 
   onMessage(message) {
-    console.log("new");
+    console.log("Client message received, From Class Session Class: ", message);
   }
 
   waitingForOpponent() {

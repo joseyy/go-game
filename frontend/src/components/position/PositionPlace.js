@@ -7,11 +7,11 @@ export default function PositionPlace(props) {
     color,
     setPlayState,
     playCoor,
-    playState,
     opponentPlay,
     wsSession,
     boardState,
     setBoardState,
+    playerTurn,
   } = props;
 
   const [style, setStyle] = useState({
@@ -41,6 +41,7 @@ export default function PositionPlace(props) {
   }, [opponentPlay, style, color, playCoor]);
 
   function handlePlay() {
+    if (playerTurn !== "play") return;
     // Check if the position is already taken or invalid
     if (boardState) {
       const coors = boardState.map(({ move: { coor } }) => coor);

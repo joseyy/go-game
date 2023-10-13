@@ -26,6 +26,7 @@ export async function handleMessagesFromServer(props, event) {
     setColor,
     setOpponentPlay,
     setBoardState,
+    setPlayerTurn,
   } = props;
   console.log("event:", event);
 
@@ -47,5 +48,7 @@ export async function handleMessagesFromServer(props, event) {
     setOpponentPlay(event.move);
   } else if (event.boardState) {
     setBoardState(event.boardState);
+  } else if (event.playerTurn) {
+    setPlayerTurn(event.playerTurn);
   }
 }
